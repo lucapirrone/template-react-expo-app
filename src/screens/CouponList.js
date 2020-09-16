@@ -1,9 +1,11 @@
-import React from "react";
-import { View, ScrollView } from "react-native";
+import React, {useEffect} from "react";
+import { View, ScrollView, BackHandler, Alert} from "react-native";
 import { ListItem } from "react-native-elements";
 import TouchableScale from "react-native-touchable-scale";
-import { Header } from "../components/Header";
 import AddButton from "../components/AddButton";
+import {addCoupon, getCoupons} from "../services/coupon/coupon";
+import {Auth} from "aws-amplify";
+import AuthHeader from "../components/auth/AuthHeader";
 
 const coupon = [
   {
@@ -21,37 +23,57 @@ const coupon = [
   },
 ];
 
-export default function CouponList() {
+export default function CouponList({ navigation }) {
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to go back?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   return (
     <View style={{ flex: 1, borderColor: "white", width: "100%" }}>
       <View>
-        <Header/>
+        <AuthHeader type="red"/>
       </View>
 
-      <AddButton onPress={() => navigation.navigate('')}/>
+      <AddButton onPress={async () => {await Auth.signOut(); navigation.navigate("HomeScreen")}}/>
+      <AddButton onPress={async () => console.log((await Auth.currentAuthenticatedUser()))}/>
+      <AddButton onPress={async () => addCoupon({
+        "societa": {
+          "nome": "Carrefour Italia",
+          "logo": "logo",
+          "colore": "912839"
+        },
+        "categoria": {
+          "nome": "Cibo"
+        },
+        "descrizione": "Buono sconto cliente",
+        "tipo": "alfanumerico",
+        "codice": "A4CD8D77S9X990V9",
+        "importo": 10,
+        "valuta": "%",
+        "scadenza": "15/06/2022"
+      })}/>
 
       <ScrollView style={{ flex: 1, padding: 10 }}>
         {coupon.map((u, i) => {
-          return (
-            <ListItem
-              containerStyle={{
-                paddingBottom: 15,
-                borderWidth: 2,
-                marginBottom: 15,
-                borderRadius: 0,
-                borderColor: u.color,
-              }}
-              Component={TouchableScale}
-              friction={90} //
-              tension={100} // These props are passed to the parent component (here TouchableScale)
-              activeScale={0.95} //
-              key={i}
-              roundAvatar
-              title={u.name}
-              leftAvatar={{ source: { uri: u.avatar } }}
-              subtitle={u.company}
-            />
-          );
+          return null;
         })}
       </ScrollView>
     </View>

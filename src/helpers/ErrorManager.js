@@ -1,38 +1,17 @@
+import {Alert} from "react-native";
+import {t} from "../services/i18n";
+
 export class ErrorManager {
-  errors = [
-    {
-      code: "GenericError",
-      title: "Si e' verificato un errore sconosciuto",
-      message: "Si e' verificato un errore sconosciuto."
-    },
-    {
-      code: "UserNotConfirmedException",
-      title: "Account non ancora confermato",
-      message: "Conferma questo account cliccando sul link inviato per email."
-    },
-    {
-      code: "UserNotFoundException",
-      title: "Account non trovato",
-      message: "Email o password errati."
-    },
-    {
-      code: "UsernameExistsException",
-      title: "Email già usata",
-      message: "Esiste già un account con l'e-mail fornita."
-    }
-  ];
-  defaultError = this.errors[0];
   constructor() {}
   error(err) {
     console.log("errormanager", err);
     if (typeof err.code === "undefined" || err.code === "" || err.code === null) {
-      return alert(this.defaultError.message);
+      return setTimeout(() => {Alert.alert(t('errors:GenericError:title'), t('errors:GenericError:message'));}, 500);
     }
-    for (let error of this.errors) {
-      if (err.code === error.code){
-        return alert(error.message);
-      }
+    if (t(code+":title") !== code+".title" && t(code+":message") !== code+".message"){
+      return setTimeout(() => {Alert.alert(t("errors:"+code+':title'), t("errors:"+code+':message'));}, 500);
+    } else {
+      return setTimeout(() => {Alert.alert(t('errors:GenericError:title'), t('errors:GenericError:message'));}, 500);
     }
-    return alert(this.defaultError.message);
   }
 }

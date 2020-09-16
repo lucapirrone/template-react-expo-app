@@ -30,44 +30,26 @@ export const confirmVerificationCode = (code) => {
   return '';
 };
 
-const EMAIL = 'EMAIL';
-const USER_ID = 'USER_ID';
-const TOKEN = 'TOKEN';
+const INFO = 'INFO';
 
-export function setEmailUserID(email, userId, callback) {
-  AsyncStorage.setItem(EMAIL, email, () => {
-    AsyncStorage.setItem(USER_ID, userId, () => {
-      callback();
-    });
-  });
-};
-export function getEmailUserID(callback) {
-  AsyncStorage.getItem(EMAIL, (err, email) => {
-    AsyncStorage.getItem(USER_ID, (err, userId) => {
-      callback(err, {email: email, userId: userId});
-    });
-  });
-};
-export function removeEmailUserID(callback) {
-  AsyncStorage.removeItem(EMAIL, () => {
-    AsyncStorage.removeItem(USER_ID, () => {
-      callback();
-    });
-  });
-};
-
-export function setToken(token, callback) {
-  AsyncStorage.setItem(TOKEN, token, () => {
+export function setUserInfo(payload, callback) {
+  AsyncStorage.setItem(INFO, JSON.stringify(payload), () => {
     callback();
   });
 };
-export function getToken(callback) {
-  AsyncStorage.getItem(TOKEN, (err, token) => {
-    callback(err, {token: token});
+export function getUserInfo(callback) {
+  AsyncStorage.getItem(INFO, (err, payload) => {
+    if (payload)
+      return callback(err, JSON.parse(payload));
+    else
+      return callback(null, false);
   });
 };
-export function removeToken(callback) {
-  AsyncStorage.removeItem(TOKEN, () => {
-    callback();
+export function removeUserInfo(callback) {
+  AsyncStorage.removeItem(INFO, (err) => {
+    if (err)
+      return callback(err);
+    else
+      return callback(null)
   });
 };

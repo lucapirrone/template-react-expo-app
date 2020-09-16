@@ -1,0 +1,86 @@
+{
+  "AuthScreen": {
+    "title": "Accedi ora per avere sincronizzati i tuoi coupon",
+    "login": "Accedi",
+    "register": "Registrati",
+    "facebook-login": "Accedi con Facebook",
+    "google-login": "Accedi con Google"
+  },
+  "LoginScreen": {
+    "welcome-back": "Bentornato.",
+    "forgot-password": "Password dimenticata?",
+    "login": "Accedi",
+    "dont-have-account-yet": "Non hai ancora un account?",
+    "register": "Registrati",
+    "user-not-confirmed-title": "Account non ancora confermato",
+    "user-not-confirmed-message": "Conferma questo account cliccando sul link inviato per email.",
+    "send-new-confirmation-link": "Invia un nuovo link",
+    "or-proceed-with": "O procedi con"
+  },
+  "RegisterScreen": {
+    "create-account": "Crea un Account.",
+    "register": "Registrati",
+    "login": "Accedi",
+    "already-have-account": "Hai già un account?",
+    "code-sended": "Il tuo account e' stato creato. Ora confermalo cliccando sul link inviato per email."
+  },
+  "ForgotPasswordScreen": {
+    "reset-password": "Reimposta la Password.",
+    "send-code": "Invia codice per il reset",
+    "change-password": "Cambia Password",
+    "come-back-login": "← Torna al Login",
+    "insert-verification-code": "Inserisci il codice di verifica ricevuto tramite Email",
+    "password-changed": "Password cambiata con successo"
+  },
+  "form": {
+    "email": "Email",
+    "password": "Password",
+    "insert-email": "Inserisci la Email",
+    "insert-password": "Inserisci la Password",
+    "insert-confirm-password": "Reiserisci la Password",
+    "confirm-password": "Conferma Password",
+    "verification-code": "Codice di Verifica",
+    "insert-verification-code": "Inserisci il codice di verifica"
+  },
+  "errors": {
+    "GenericError": {
+      "title": "Si e' verificato un errore sconosciuto",
+      "message": "Si e' verificato un errore sconosciuto."
+    },
+    "UserNotConfirmedException": {
+      "title": "Account non ancora confermato",
+      "message": "Conferma questo account cliccando sul link inviato per email."
+    },
+    "UserNotFoundException": {
+      "title": "Account non trovato",
+      "message": "Email o password errati."
+    },
+    "NotAuthorizedException": {
+      "title": "Account non trovato",
+      "message": "Email o password errati."
+    },
+    "UsernameExistsException": {
+      "title": "Email già usata",
+      "message": "Esiste già un account con l'e-mail fornita."
+    },
+    "EmailAlreadyExists": {
+      "title": "Email già usata",
+      "message": "Esiste già un account con l'e-mail fornita."
+    },
+    "LoginNotCompleted": {
+      "title": "Login non completato",
+      "message": "Login non completato."
+    },
+    "CodeMismatchException": {
+      "title": "Codice non corretto",
+      "message": "Il codice inserito non risulta corretto."
+    },
+    "InvalidParameterException": {
+      "title": "Email non valida",
+      "message": "L'email inserita non è stata ancora verificata."
+    },
+    "test": {
+      "erroree": "provola"
+    }
+  }
+}
